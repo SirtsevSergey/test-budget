@@ -1,0 +1,6 @@
+insert into budget (year, month, amount, type)
+values (2019, 9, 200000,'Комиссия')
+    insert into budget (year, month, amount, type)
+values (2020, 8, 100000,'Комиссия')
+insert into budget (year, month, amount, type)
+values (2021, 9, 300000,'Комиссия')
