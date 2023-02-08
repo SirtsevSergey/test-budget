@@ -2,7 +2,6 @@ package mobi.sevenwinds.app.author
 
 import com.papsign.ktor.openapigen.annotations.parameters.PathParam
 import com.papsign.ktor.openapigen.annotations.parameters.QueryParam
-import com.papsign.ktor.openapigen.annotations.type.number.integer.max.Max
 import com.papsign.ktor.openapigen.annotations.type.number.integer.min.Min
 import com.papsign.ktor.openapigen.route.info
 import com.papsign.ktor.openapigen.route.path.normal.NormalOpenAPIRoute
@@ -10,6 +9,7 @@ import com.papsign.ktor.openapigen.route.path.normal.get
 import com.papsign.ktor.openapigen.route.path.normal.post
 import com.papsign.ktor.openapigen.route.response.respond
 import com.papsign.ktor.openapigen.route.route
+import mobi.sevenwinds.app.budget.BudgetRecord
 
 fun NormalOpenAPIRoute.author() {
     route("/author") {
@@ -27,6 +27,19 @@ fun NormalOpenAPIRoute.author() {
 
 data class AuthorRecord(
     val fio: String
+
+)
+data class AuthorNameParam(
+    @PathParam("Имя Автора") val fio: String,
+    @QueryParam("Лимит пагинации") val limit: Int,
+    @QueryParam("Смещение пагинации") val offset: Int,
+) {
+
+}
+
+class AuthorResponse(
+    val total: Int,
+    val items: List<AuthorRecord>
 )
 
 //data class BudgetYearParam(

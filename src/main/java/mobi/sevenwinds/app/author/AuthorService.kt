@@ -16,22 +16,21 @@ object AuthorService {
         }
     }
 
-//    suspend fun getYearStats(param: BudgetYearParam): BudgetYearStatsResponse = withContext(Dispatchers.IO) {
-//        transaction {
-//            val query = BudgetTable
-//                .select { BudgetTable.year eq param.year }
-//                .limit(param.limit, param.offset)
-//
-//            val total = query.count()
-//            val data = BudgetEntity.wrapRows(query).map { it.toResponse() }
-//
-//            val sumByType = data.groupBy { it.type.name }.mapValues { it.value.sumOf { v -> v.amount } }
-//
-//            return@transaction BudgetYearStatsResponse(
-//                total = total,
-//                totalByType = sumByType,
-//                items = data
-//            )
-//        }
-//    }
+    suspend fun getName(param: AuthorNameParam): AuthorResponse = withContext(Dispatchers.IO) {
+        transaction {
+            val query = AuthorTable
+                .select { AuthorTable.fio eq param.fio }
+                .limit(param.limit, param.offset)
+
+            val fio = query.count()
+            val data = AuthorTable.AuthorEntity.wrapRows(query).map { it.toResponse() }
+
+
+
+            return@transaction AuthorResponse(
+                total = fio,
+                items = data,
+            )
+        }
+    }
 }
