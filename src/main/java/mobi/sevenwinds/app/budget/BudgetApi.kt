@@ -30,19 +30,23 @@ data class BudgetRecord(
     @Min(1) @Max(12) val month: Int,
     @Min(1) val amount: Int,
     val type: BudgetType,
-//    val idAuthor: Int
+    val idAuthor: Int?,
+    val fioAuthor: String?,
 )
-
 data class BudgetYearParam(
     @PathParam("Год") val year: Int,
     @QueryParam("Лимит пагинации") val limit: Int,
     @QueryParam("Смещение пагинации") val offset: Int,
+    @QueryParam("Id_Author") val idAuthor: Int?
+
 )
+
 
 class BudgetYearStatsResponse(
     val total: Int,
     val totalByType: Map<String, Int>,
     val items: List<BudgetRecord>,
+
 
 )
 

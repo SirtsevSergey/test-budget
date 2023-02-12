@@ -16,12 +16,6 @@ fun NormalOpenAPIRoute.author() {
         route("/add").post<Unit, AuthorRecord, AuthorRecord>(info("Добавить запись")) { param, body ->
             respond(AuthorService.addRecord(body))
         }
-
-//        route("/year/{year}/stats") {
-//            get<AurhorYearParam, BudgetYearStatsResponse>(info("Получить статистику за год")) { param ->
-//                respond(AuthorService.getYearStats(param))
-//            }
-//        }
     }
 }
 
@@ -31,8 +25,11 @@ data class AuthorRecord(
 )
 data class AuthorNameParam(
     @PathParam("Имя Автора") val fio: String,
-    @QueryParam("Лимит пагинации") val limit: Int,
-    @QueryParam("Смещение пагинации") val offset: Int,
+    @QueryParam("id") val idAuthorNameParam:  Int,
+//    val sql = """
+//        SELECT * FROM author
+//    """.trimIndent()
+
 ) {
 
 }
@@ -41,18 +38,3 @@ class AuthorResponse(
     val total: Int,
     val items: List<AuthorRecord>
 )
-
-//data class BudgetYearParam(
-//    @PathParam("Год") val year: Int,
-//    @QueryParam("Лимит пагинации") val limit: Int,
-//    @QueryParam("Смещение пагинации") val offset: Int,
-//)
-//
-//class BudgetYearStatsResponse(
-//    val total: Int,
-//    val totalByType: Map<String, Int>,
-//    val items: List<BudgetRecord>
-//)
-//
-//enum class BudgetType {
-//    Приход, Расход, Комиссия

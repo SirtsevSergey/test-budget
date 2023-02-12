@@ -64,6 +64,7 @@ dependencies {
     testImplementation("org.assertj:assertj-core:3.19.0")
     testImplementation("io.rest-assured:rest-assured:4.3.3")
     testImplementation("org.hamcrest:hamcrest:2.2")
+
 }
 
 tasks.withType<Jar> {

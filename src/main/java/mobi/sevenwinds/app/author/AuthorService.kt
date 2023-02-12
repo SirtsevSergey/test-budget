@@ -16,21 +16,4 @@ object AuthorService {
         }
     }
 
-    suspend fun getName(param: AuthorNameParam): AuthorResponse = withContext(Dispatchers.IO) {
-        transaction {
-            val query = AuthorTable
-                .select { AuthorTable.fio eq param.fio }
-                .limit(param.limit, param.offset)
-
-            val fio = query.count()
-            val data = AuthorTable.AuthorEntity.wrapRows(query).map { it.toResponse() }
-
-
-
-            return@transaction AuthorResponse(
-                total = fio,
-                items = data,
-            )
-        }
-    }
 }
